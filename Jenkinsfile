@@ -33,7 +33,7 @@ pipeline {
           sh 'pwd'
           sh 'cat hello.txt'
           sh 'ls -ltra'
-          sh 'uname -a;sleep 60'
+          sh 'uname -a;sleep 120'
           sh 'date'
         }
       }
