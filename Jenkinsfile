@@ -10,7 +10,12 @@ pipeline {
             image: busybox
             args:
               - sleep
-              - "3600"
+              - "300"
+          - name: busybox1-34
+            image: busybox:1.34
+            args:
+              - sleep
+              - "300"
         '''
     }
   }
@@ -19,7 +24,14 @@ pipeline {
       steps {
         container('busybox') {
           sh 'date'
-          sh 'uname -a;sleep 120'
+          sh 'echo "Hello Simatupang Family" > hello.txt'
+          sh 'ls -ltra'
+        }
+        container('busybox1-34') {
+          sh 'date'
+          sh 'cat hello.txt'
+          sh 'ls -ltra'
+          sh 'uname -a;sleep 60'
           sh 'date'
         }
       }
