@@ -25,10 +25,12 @@ pipeline {
         container('busybox') {
           sh 'date'
           sh 'echo "Hello Simatupang Family" > hello.txt'
+          sh 'pwd'
           sh 'ls -ltra'
         }
         container('busybox1-34') {
           sh 'date'
+          sh 'pwd'
           sh 'cat hello.txt'
           sh 'ls -ltra'
           sh 'uname -a;sleep 60'
