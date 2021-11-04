@@ -1,21 +1,28 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile "jenkins-pod.yaml"
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: busybox
+            image: busybox
+            args:
+              - sleep
+              - "3600"
+        '''
     }
   }
-
   stages {
-    stage("Build") {
+    stage('Run busybox') {
       steps {
-        git url:'https://github.com/nfidelc/jenkins-k3d.git', branch:'main'
+        container('busybox') {
+          sh 'date'
+          sh 'uname -a;sleep 120'
+          sh 'date'
         }
-    }
-    stage('Apply Kubernetes Deploy') {
-      withKubeConfig([credentialsId: 'config', serverUrl: 'https://192.168.56.109:6443']) {
-        sh 'kubectl apply -f my-kubernetes-directory'
       }
-	}
-  }
+    }
   }
 }
