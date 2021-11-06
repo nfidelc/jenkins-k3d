@@ -24,7 +24,7 @@ pipeline {
       steps {
         container('busybox') {
           sh 'date'
-          sh 'echo "Hello Simatupang. Its Weekend...yay" > hello.txt'
+          sh 'echo "Hello Simatupang. Its weekend...yay" > hello.txt'
           sh 'pwd'
           sh 'ls -ltra'
         }
